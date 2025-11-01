@@ -33,16 +33,16 @@ public class PatientRepository
 	}
 	
 	//login
-	public String findPatientByIdandPassword(String email,String password) 
+	public Patient findPatientByIdandPassword(String email,String password) 
 	{
 		String sql = "SELECT name FROM patient WHERE email = ? and password = ?";
 		try 
 		{
-			return jdbcTemplate.queryForObject(sql,String.class,email,password);
+			return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Patient.class), email, password);
 		}
 		catch(Exception e) 
 		{
-			return "Invalid Credentials";
+			return null;
 		}
 	}
 	

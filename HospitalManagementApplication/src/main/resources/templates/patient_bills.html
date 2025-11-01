@@ -57,11 +57,11 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="bill : ${bills}">
-            <td th:text="${bill.invoiceId}"></td>
-            <td th:text="${bill.date}"></td>
-            <td th:text="${bill.doctorName}"></td>
-            <td th:text="${bill.amount}"></td>
+        <tr th:each="invoice : ${invoice}">
+            <td th:text="${invoice.invoiceId}"></td>
+            <td th:text="${invoice.date}"></td>
+            <td th:text="${invoice.doctorName}"></td>
+            <td th:text="${invoice.amount}"></td>
         </tr>
         </tbody>
     </table>
