@@ -39,7 +39,7 @@ public class PatientController {
             return "dashboard-patient";
         } else {
             redirectAttributes.addFlashAttribute("error", "Invalid phone number or password!");
-            return "redirect:/patients/registerPatient";
+            return "redirect:/patients/register";
         }
     }
 
