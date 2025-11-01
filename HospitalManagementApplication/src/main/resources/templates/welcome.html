@@ -4,6 +4,9 @@
 </head>
 <body>
     <h1 th:text="${welcome}">Welcome to Hospital Management System</h1>
-	<p th:if="${error}" th:text="${error}" style="color:red;"></p>
+	<form th:action="@{/doctorlogin}" method="post">
+		<label>Doctor</label>
+		
+	</form>
 </body>
 </html>
