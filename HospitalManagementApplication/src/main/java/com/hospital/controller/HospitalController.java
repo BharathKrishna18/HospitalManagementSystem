@@ -10,7 +10,7 @@ public class HospitalController {
 	@GetMapping("/")
 	public String welcome(Model model) {
 		
-		model.addAttribute("welcome", "Welcome to ABC Hospital:)");
+		model.addAttribute("welcome", "Welcome to ABC Hospital");
 		return "welcome";
 	}
 	
