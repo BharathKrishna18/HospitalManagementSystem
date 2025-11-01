@@ -16,23 +16,13 @@ public class PatientRepository {
 
     // ✅ Register Patient
     public int registerPatient(Patient patient) {
-        String sql = "INSERT INTO patient (name, email, password, phone_number, gender, dob, weight, height, blood_group, allergies, previous_medical_history) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        return jdbcTemplate.update(sql,
-                patient.getName(),
-                patient.getEmail(),
-                patient.getPassword(),
-                patient.getPhoneNumber(),
-                patient.getGender(),
-                patient.getDob(),
-                patient.getWeight(),
-                patient.getHeight(),
-                patient.getBloodGroup(),
-                patient.getAllergies(),
-                patient.getPreviousMedicalHistory()
-        );
+    	String sql = "INSERT INTO patient (name, mobile_number, pwd, blood_group, height, weight, allergies, patient_history) "
+    	           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    	return jdbcTemplate.update(sql, patient.getName(), patient.getPhoneNumber(),
+    	        patient.getPassword(), patient.getBloodGroup(), patient.getHeight(), patient.getWeight(),
+    	        patient.getAllergies(), patient.getPreviousMedicalHistory());
     }
+    
 
     // ✅ Login using phone number and password
     public Patient findPatientByPhoneAndPassword(String phoneNumber, String password) {

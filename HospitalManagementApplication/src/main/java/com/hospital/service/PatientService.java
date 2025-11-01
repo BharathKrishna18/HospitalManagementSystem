@@ -30,4 +30,9 @@ public class PatientService {
     {
         return patientRepository.updatePatient(patient);
     }
+    
+    public void savePatient(Patient patient) 
+    {
+        patientRepository.registerPatient(patient);
+    }
 }

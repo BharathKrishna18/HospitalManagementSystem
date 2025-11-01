@@ -4,6 +4,8 @@ import com.hospital.model.Patient;
 import com.hospital.model.Invoice;
 import com.hospital.repository.PatientRepository;
 import com.hospital.service.InvoiceService;
+import com.hospital.service.PatientService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,9 @@ public class PatientController {
 
     @Autowired
     private InvoiceService invoiceService;
+    
+    @Autowired
+    private PatientService patientService;
 
     @GetMapping("/login")
     public String showLoginPage(Model model) {
@@ -72,6 +77,12 @@ public class PatientController {
             redirectAttributes.addFlashAttribute("error", "Registration failed! Try again!");
             return "redirect:/patient/register";
         }
+    }
+    
+    @PostMapping("/saveProfile")
+    public String saveProfile(@ModelAttribute Patient patient) {
+        patientService.savePatient(patient);
+        return "redirect:/patient/dashboard-patient";
     }
 
     @GetMapping("/dashboard/{id}")
