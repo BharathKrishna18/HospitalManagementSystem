@@ -22,4 +22,9 @@ public class AuthController {
 		return "doctor-login";
 	}
 	
+	@GetMapping("/admin/login")
+	public String adminLoginPage() {
+		return "admin-login";
+	}
+	
 }

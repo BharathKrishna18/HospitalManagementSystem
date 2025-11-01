@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Doctor Registration</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #56ccf2, #2f80ed);
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+	.logout-btn {
+	    position: absolute;
+	    top: 15px;
+	    right: 15px;
+	    background-color: #dc3545;
+	    color: white;
+	    padding: 8px 16px;
+	    border: none;
+	    border-radius: 4px;
+	    text-decoration: none;
+	    cursor: pointer;
+	    font-weight: bold;
+	    width: auto; /* ✅ Fixes it from stretching full width */
+	}
+	.logout-btn:hover {
+	    background-color: #c82333;
+	}
+
+    .container {
+      max-width: 600px;
+      margin: 100px auto;
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-weight: 500;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #2f80ed;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background-color 0.2s ease;
+      display: block;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #1b5edb;
+    }
+
+    .back-btn {
+      margin-top: 15px;
+      background-color: #7f8c8d;
+    }
+
+    .back-btn:hover {
+      background-color: #616a6b;
+    }
+
+  </style>
+</head>
+<body>
+
+  <button class="logout-btn" onclick="window.location.href='login.html'">Logout</button>
+
+  <div class="container">
+    <h1>New Doctor Registration</h1>
+
+    <form>
+      <label for="docName">Doctor Name:</label>
+      <input type="text" id="docName" name="docName" placeholder="Enter doctor name">
+
+      <label for="mobile">Mobile Number:</label>
+      <input type="text" id="mobile" name="mobile" placeholder="Enter mobile number">
+
+      <label for="docId">Doctor ID:</label>
+      <input type="text" id="docId" name="docId" placeholder="Enter doctor ID">
+
+      <label for="specialisation">Specialisation:</label>
+      <select id="specialisation" name="specialisation">
+        <option>-- Select Specialisation --</option>
+        <option>Cardiology</option>
+        <option>Neurology</option>
+        <option>Orthopedics</option>
+        <option>Pediatrics</option>
+        <option>General Medicine</option>
+      </select>
+
+      <!-- Placeholder: Replace action with backend endpoint -->
+      <button type="submit">Register Doctor</button>
+    </form>
+
+    <button class="back-btn" onclick="window.location.href='admin_dashboard.html'">← Back to Dashboard</button>
+  </div>
+
+</body>
+</html>

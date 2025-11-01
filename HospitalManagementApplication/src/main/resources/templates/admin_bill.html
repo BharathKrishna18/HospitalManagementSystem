@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate Bill</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #56ccf2, #2f80ed);
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .logout-btn:hover {
+      background-color: #c0392b;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 100px auto;
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      color: #333;
+    }
+
+    .total {
+      text-align: right;
+      font-weight: bold;
+      margin-top: 15px;
+      font-size: 18px;
+    }
+
+    .btn {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      text-align: center;
+      background-color: #2f80ed;
+      color: white;
+      border: none;
+      padding: 10px 0;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #1b5edb;
+    }
+
+  </style>
+</head>
+<body>
+
+  <button class="logout-btn" onclick="window.location.href='login.html'">Logout</button>
+
+  <div class="container">
+    <h1>Patient Bill</h1>
+
+    <!-- Dummy Data Example -->
+    <!-- Backend will replace with DB data -->
+    <!-- th:text="${patientName}" etc. -->
+    <p><strong>Patient Name:</strong> Rohit Kumar</p>
+    <p><strong>Doctor:</strong> Dr. Meera Sharma</p>
+    <p><strong>Date:</strong> 1 Nov 2025</p>
+    <p><strong>Bill ID:</strong> B101</p>
+
+    <h3>Medicines Prescribed</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Medicine Name</th>
+          <th>Dosage</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Backend fetch example: th:each="m : ${medicationList}" -->
+        <tr>
+          <td>Paracetamol 500mg</td>
+          <td>2 times/day</td>
+          <td>₹50</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="total">
+      Total Amount: ₹50
+    </div>
+
+  </div>
+
+</body>
+</html>

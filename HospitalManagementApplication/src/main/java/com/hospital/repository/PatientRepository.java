@@ -13,7 +13,7 @@ public class PatientRepository
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	//Register new Patient
+	//Register
 	public int registerPatient(Patient patient)
 	{
 		String sql = "INSERT INTO patient (mobile_number, name, pwd, dob, blood_group, height, weight, allergies, patient_history) "
@@ -33,6 +33,7 @@ public class PatientRepository
 	     return updatedPatient;
 	}
 	
+	//login
 	public String findPatientByIdandPassword(String email,String password) 
 	{
 		String sql = "SELECT name FROM patient WHERE email = ? and password = ?";
@@ -45,4 +46,7 @@ public class PatientRepository
 			return "Invalid Credentials";
 		}
 	}
+	
+	//update
+	
 }
