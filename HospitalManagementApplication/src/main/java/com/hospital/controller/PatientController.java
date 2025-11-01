@@ -28,16 +28,17 @@ public class PatientController {
     }
 
     @PostMapping("/loginPatient")
-    public String login(@RequestParam String email,
+    public String login(@RequestParam String phoneNumber,
                         @RequestParam String password,
                         Model model,
                         RedirectAttributes redirectAttributes) {
-        Patient patient = patientRepository.findPatientByIdandPassword(email, password);
+
+        Patient patient = patientRepository.findPatientByIdandPassword(phoneNumber, password);
         if (patient != null) {
             model.addAttribute("patient", patient);
             return "dashboard-patient";
         } else {
-            redirectAttributes.addFlashAttribute("error", "Invalid email or password!");
+            redirectAttributes.addFlashAttribute("error", "Invalid phone number or password!");
             return "redirect:/patients/registerPatient";
         }
     }
