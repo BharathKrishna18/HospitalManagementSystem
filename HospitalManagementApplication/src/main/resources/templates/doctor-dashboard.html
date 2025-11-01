@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #56ccf2, #2f80ed);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 50px;
+        }
+
+        .main-title {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .dashboard-container {
+            width: 90%;
+            max-width: 950px;
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+        }
+
+        h3 {
+            color: #2f80ed;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #2f80ed;
+            color: white;
+        }
+
+        footer {
+            color: white;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            background-color: rgb(255, 0, 0);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 15px;
+        }
+
+        .logout-btn:hover {
+            background-color: #1b5edb;
+        }
+
+        .btn-view {
+            background-color: #2f80ed;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .btn-view:hover {
+            background-color: #1b5edb;
+        }
+    </style>
+</head>
+
+<body>
+<a th:href="@{/}" class="btn logout-btn">Logout</a>
+
+<h2 class="main-title">🏥 Doctor Dashboard</h2>
+
+<div class="dashboard-container">
+    <h3>Appointments</h3>
+
+    <table class="table table-bordered text-center align-middle">
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Appointment Date</th>
+                <th>Time Slot</th>
+                <th>Status</th>
+                <th>View Patient Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Example static rows (replace later with dynamic data) -->
+            <tr>
+                <td>Ayushi Sharma</td>
+                <td>2025-11-02</td>
+                <td>10:00 AM - 10:30 AM</td>
+                <td>Confirmed</td>
+                <td><a th:href="@{/doctor/patient-details/1}" class="btn btn-view">View Details</a></td>
+            </tr>
+            <tr>
+                <td>Riya Singh</td>
+                <td>2025-11-02</td>
+                <td>11:00 AM - 11:30 AM</td>
+                <td>Pending</td>
+                <td><a th:href="@{/doctor/patient-details/2}" class="btn btn-view">View Details</a></td>
+            </tr>
+            <tr>
+                <td>Neha Patel</td>
+                <td>2025-11-03</td>
+                <td>02:00 PM - 02:30 PM</td>
+                <td>Completed</td>
+                <td><a th:href="@{/doctor/patient-details/3}" class="btn btn-view">View Details</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>
