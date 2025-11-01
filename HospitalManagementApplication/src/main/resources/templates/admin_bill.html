@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,18 +91,17 @@
 </head>
 <body>
 
-  <button class="logout-btn" onclick="window.location.href='login.html'">Logout</button>
+  <!-- Logout button -->
+  <button class="logout-btn" th:onclick="'window.location.href=\'/logout\''">Logout</button>
 
   <div class="container">
     <h1>Patient Bill</h1>
 
-    <!-- Dummy Data Example -->
-    <!-- Backend will replace with DB data -->
-    <!-- th:text="${patientName}" etc. -->
-    <p><strong>Patient Name:</strong> Rohit Kumar</p>
-    <p><strong>Doctor:</strong> Dr. Meera Sharma</p>
-    <p><strong>Date:</strong> 1 Nov 2025</p>
-    <p><strong>Bill ID:</strong> B101</p>
+    <!-- Dynamic Data -->
+    <p><strong>Patient Name:</strong> <span th:text="${invoice.patientName}"></span></p>
+    <p><strong>Doctor:</strong> <span th:text="${invoice.doctorName}"></span></p>
+    <p><strong>Date:</strong> <span th:text="${invoice.dateIssued}"></span></p>
+    <p><strong>Bill ID:</strong> <span th:text="${invoice.invoiceId}"></span></p>
 
     <h3>Medicines Prescribed</h3>
     <table>
@@ -114,17 +113,16 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Backend fetch example: th:each="m : ${medicationList}" -->
-        <tr>
-          <td>Paracetamol 500mg</td>
-          <td>2 times/day</td>
-          <td>₹50</td>
+        <tr th:each="m : ${medicationList}">
+          <td th:text="${m.medicineName}"></td>
+          <td th:text="${m.dosage}"></td>
+          <td th:text="'₹' + ${m.price}"></td>
         </tr>
       </tbody>
     </table>
 
     <div class="total">
-      Total Amount: ₹50
+      Total Amount: ₹<span th:text="${invoice.amount}"></span>
     </div>
 
   </div>

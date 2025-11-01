@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,39 +45,6 @@
       margin-bottom: 30px;
     }
 
-    .form-section, .table-section {
-      margin-top: 30px;
-    }
-
-    label {
-      font-weight: 500;
-      color: #333;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-
-    button {
-      background-color: #2f80ed;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 15px;
-      transition: background-color 0.2s ease;
-    }
-
-    button:hover {
-      background-color: #1b5edb;
-    }
-
     table {
       width: 100%;
       border-collapse: collapse;
@@ -112,14 +79,11 @@
 </head>
 <body>
 
-  <a href="/" class="logout-btn">Logout</a>
+  <a th:href="@{/logout}" class="logout-btn">Logout</a>
 
   <div class="container">
     <h1>Admin Dashboard</h1>
 
-   
-
-    <!-- Today's Appointments Section -->
     <div class="table-section">
       <h3>📅 Today's Appointments</h3>
       <table>
@@ -132,26 +96,41 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Backend will replace this with real data -->
-          <!-- Example: th:each="appt : ${todayAppointments}" -->
-          <tr>
-            <td>Dr. Meera Sharma</td>
-            <td>Rohit Kumar</td>
-            <td>10:00 AM - 10:30 AM</td>
-            <td><button class="generate-btn" onclick="window.location.href='admin_bill.html'">Generate Bill</button></td>
+          <!-- Loop dynamically through appointments -->
+          <tr th:each="appt : ${todayAppointments}">
+            <td th:text="${appt.doctorName}">Dr. Name</td>
+            <td th:text="${appt.patientName}">Patient Name</td>
+            <td th:text="${appt.slot}">10:00 AM - 10:30 AM</td>
+            <td>
+              <button class="generate-btn"
+                      th:onclick="'window.location.href=\'' + @{/admin/bill/{id}(id=${appt.appointmentId})} + '\''">
+                Generate Bill
+              </button>
+            </td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(todayAppointments)}">
+            <td colspan="4">No appointments scheduled for today.</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+
   <div style="text-align: center; margin-top: 30px;">
+<<<<<<< HEAD
 	<button th:onclick="|window.location.href='@{/admin/login/doctor_registration}'|"
 	        style="background-color: #1b5edb; color: white; border: none; 
 	               padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px;">
 	  ➕ New Doctor Registration
 	</button>
+=======
+    <button th:onclick="'window.location.href=\'' + @{/admin/doctor-registration} + '\''"
+            style="background-color: #1b5edb; color: white; border: none; 
+                   padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px;">
+      ➕ New Doctor Registration
+    </button>
+>>>>>>> branch 'main' of https://github.com/BharathKrishna18/HospitalManagementSystem.git
   </div>
-
 
 </body>
 </html>
