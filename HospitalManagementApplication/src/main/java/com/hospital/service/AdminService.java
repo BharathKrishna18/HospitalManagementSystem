@@ -16,4 +16,9 @@ public class AdminService {
 		String result = adminRepository.validateAdmin(adminId, password);
 		return result;
 	}
+	
+	public int registerDoctor(String name,String mobileNumber,String doctorId,String specialization,String password) {
+		int saveResult = adminRepository.addDoctorDetails(name,mobileNumber,doctorId,specialization,password);
+		return saveResult;
+	}
 }

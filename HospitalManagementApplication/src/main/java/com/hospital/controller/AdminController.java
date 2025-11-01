@@ -29,6 +29,27 @@ public class AdminController {
 		}
 	}
 	
+	@GetMapping("/admin/login/doctor_registration")
+	public String doctorForm() {
+	    return "admin_doctor_registration";
+	}
 
-	
+	@PostMapping("/admin/login/doctor_registration")
+	public String doctorRegistration(@RequestParam("docId") String doctorId,
+			@RequestParam("docName") String doctorName,
+			@RequestParam("mobile") String mobileNumber,
+			@RequestParam("specialisation") String specialization,
+			@RequestParam("password") String password,
+			Model model) {
+		int result = adminService.registerDoctor(doctorName,mobileNumber,doctorId,specialization,password);
+		
+		if(result > 0) {
+			model.addAttribute("message", "Doctor Successfully Registered!");
+			
+		}else {
+			model.addAttribute("message", "Failed to register doctor details");
+		}
+		
+		return "admin_doctor_registration";
+	}
 }
