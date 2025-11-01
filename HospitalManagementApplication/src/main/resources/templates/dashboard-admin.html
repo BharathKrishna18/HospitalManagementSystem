@@ -98,14 +98,18 @@
         <tbody>
           <!-- Loop dynamically through appointments -->
           <tr th:each="appt : ${todayAppointments}">
-            <td th:text="${appt.doctorName}">Dr. Name</td>
-            <td th:text="${appt.patientName}">Patient Name</td>
-            <td th:text="${appt.slot}">10:00 AM - 10:30 AM</td>
+            <td th:text="${appt.doctorName}"></td>
+            <td th:text="${appt.patientName}"></td>
+            <td th:text="${appt.timeSlot}"></td>
             <td>
-              <button class="generate-btn"
-                      th:onclick="'window.location.href=\'' + @{/admin/bill/{id}(id=${appt.appointmentId})} + '\''">
-                Generate Bill
-              </button>
+				<button class="generate-btn"
+				        th:onclick="'window.location.href=\'' + @{/admin/bill(
+				            id=${appt.appointmentId},
+				            doctorName=${appt.doctorName},
+				            patientName=${appt.patientName}
+				        )} + '\''">
+				  Generate Bill
+				</button>
             </td>
           </tr>
           <tr th:if="${#lists.isEmpty(todayAppointments)}">
@@ -117,19 +121,11 @@
   </div>
 
   <div style="text-align: center; margin-top: 30px;">
-<<<<<<< HEAD
-	<button th:onclick="|window.location.href='@{/admin/login/doctor_registration}'|"
-	        style="background-color: #1b5edb; color: white; border: none; 
-	               padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px;">
-	  ➕ New Doctor Registration
-	</button>
-=======
-    <button th:onclick="'window.location.href=\'' + @{/admin/doctor-registration} + '\''"
+    <button th:onclick="'window.location.href=\'' + @{/admin/login/doctor_registration} + '\''"
             style="background-color: #1b5edb; color: white; border: none; 
                    padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px;">
       ➕ New Doctor Registration
     </button>
->>>>>>> branch 'main' of https://github.com/BharathKrishna18/HospitalManagementSystem.git
   </div>
 
 </body>

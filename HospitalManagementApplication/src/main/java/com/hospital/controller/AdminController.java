@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hospital.model.Appointment;
+import com.hospital.model.Bill;
 import com.hospital.service.AdminService;
+import java.util.*
+;@Controller
 
-@Controller
 public class AdminController {
 	
 	@Autowired
@@ -18,9 +21,15 @@ public class AdminController {
 	@PostMapping("/admin/login")
 	public String processAdminLogin(@RequestParam("adminId") String adminId,
 			@RequestParam("password") String password,Model model) {
-			
+		
+		
 		String result = adminService.findAdminByIdandPassword(adminId,password);
 		if(result!=null) {
+			List<Appointment> todayAppointments = adminService.getAppointments();
+			
+			if(todayAppointments!=null) {
+				model.addAttribute("todayAppointments",todayAppointments);
+			}
 			model.addAttribute("adminname", result);
 			return "dashboard-admin";
 			
@@ -29,6 +38,7 @@ public class AdminController {
 		}
 	}
 	
+
 	@GetMapping("/admin/login/doctor_registration")
 	public String doctorForm() {
 	    return "admin_doctor_registration";
@@ -51,5 +61,29 @@ public class AdminController {
 		}
 		
 		return "admin_doctor_registration";
+	}
+	
+	@GetMapping("/admin/bill")
+	public String adminBillView(
+			@RequestParam("id") int id,
+			@RequestParam("doctorName") String doctorName,
+			@RequestParam("patientName") String patientName,
+			Model model
+			) {
+		
+		List<Bill> generatedBill = adminService.generateBill(id);
+		
+		double totalAmount = 0.0;
+		 if (generatedBill != null && !generatedBill.isEmpty()) {
+		        totalAmount = generatedBill.stream()
+		            .mapToDouble(b -> b.getPrice())
+		            .sum();
+		    }
+		model.addAttribute("id",id);
+		model.addAttribute("bills",generatedBill);
+		model.addAttribute("doctorName",doctorName);
+		model.addAttribute("patientName",patientName);
+		model.addAttribute("totalAmount",totalAmount+1000);
+		return "admin_bill";
 	}
 }

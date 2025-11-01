@@ -28,4 +28,8 @@ public class AuthController {
 		return "admin-login";
 	}
 	
+	@GetMapping("/patient/login")
+	public String patientLogin() {
+		return "patient-login";
+	}
 }

@@ -91,18 +91,24 @@
 </head>
 <body>
 
-  <!-- Logout button -->
-  <button class="logout-btn" th:onclick="'window.location.href=\'/logout\''">Logout</button>
+  <button class="logout-btn" onclick="window.location.href='/logout'">Logout</button>
 
   <div class="container">
     <h1>Patient Bill</h1>
 
-    <!-- Dynamic Data -->
-    <p><strong>Patient Name:</strong> <span th:text="${invoice.patientName}"></span></p>
-    <p><strong>Doctor:</strong> <span th:text="${invoice.doctorName}"></span></p>
-    <p><strong>Date:</strong> <span th:text="${invoice.dateIssued}"></span></p>
-    <p><strong>Bill ID:</strong> <span th:text="${invoice.invoiceId}"></span></p>
+    <!-- Basic Bill Info -->
+    <p><strong>Patient Name:</strong> <span th:text="${patientName}">Rohit Kumar</span></p>
+    <p><strong>Doctor:</strong> <span th:text="${doctorName}">Dr. Meera Sharma</span></p>
+    <p><strong>Date:</strong> 
+      <span th:text="${#lists.isEmpty(bills) ? 'N/A' : #temporals.format(bills[0].date, 'dd MMM yyyy HH:mm')}"></span>
+    </p>
+    <p><strong>Bill ID:</strong> 
+      <span th:text="${#lists.isEmpty(bills) ? 'N/A' : bills[0].billId}">
+        B101
+      </span>
+    </p>
 
+    <!-- Medicines Table -->
     <h3>Medicines Prescribed</h3>
     <table>
       <thead>
@@ -113,16 +119,25 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="m : ${medicationList}">
-          <td th:text="${m.medicineName}"></td>
-          <td th:text="${m.dosage}"></td>
-          <td th:text="'₹' + ${m.price}"></td>
+        <tr th:each="b : ${bills}">
+          <td th:text="${b.medicineName}"></td>
+          <td th:text="${b.dosage}"></td>
+          <td th:text="'₹' + ${b.price}"></td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(bills)}">
+          <td colspan="3">No medicines found.</td>
         </tr>
       </tbody>
     </table>
 
+    <!-- Consultation Fee Section -->
     <div class="total">
-      Total Amount: ₹<span th:text="${invoice.amount}"></span>
+      Consultation Fee: ₹1000
+    </div>
+
+    <!-- Total Bill -->
+    <div class="total">
+      Total Amount: ₹<span th:text="${totalAmount}"></span>
     </div>
 
   </div>
