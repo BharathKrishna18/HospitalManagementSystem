@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,6 @@
 	  min-height: 100vh;
 	  color: #333;
 	}
-
 
     .logout-btn {
       position: absolute;
@@ -83,7 +82,7 @@
       border-radius: 5px;
       cursor: pointer;
       font-size: 15px;
-      width: 95%;               /* Makes button almost full width */
+      width: 95%;
       max-width: 500px;
       transition: background-color 0.2s ease;
     }
@@ -95,12 +94,12 @@
 </head>
 <body>
 
-  <button class="logout-btn" onclick="window.location.href='login.html'">Logout</button>
+  <!-- Logout -->
+  <a th:href="@{/logout}" class="logout-btn">Logout</a>
 
   <div class="welcome">
-    <!-- Replace below with dynamic data from DB -->
-    <!-- Example: Welcome {{patient_name}} ({{patient_id}}) -->
-    <h1>Welcome John Doe (P001)</h1>
+    <!-- Dynamically show patient name and ID -->
+    <h1 th:text="'Welcome ' + ${patient.name} + ' (' + ${patient.patientId} + ')'">Welcome [Patient Name] ([Patient ID])</h1>
   </div>
 
   <div class="dashboard-container">
@@ -108,19 +107,19 @@
     <div class="card">
       <h2>Profile</h2>
       <p>View or edit your personal information and contact details.</p>
-      <button onclick="window.location.href='patient_profile.html'">Modify Profile</button>
+      <button th:onclick="'window.location.href=\'' + @{/patient/profile/{id}(id=${patient.patientId})} + '\''">Modify Profile</button>
     </div>
 
     <div class="card">
       <h2>Appointments</h2>
-      <p>Book new appointments</p>
-      <button onclick="window.location.href='patient_appointments.html'">Manage Appointments</button>
+      <p>Book new appointments or view your previous visits.</p>
+      <button th:onclick="'window.location.href=\'' + @{/patient/appointments/{id}(id=${patient.patientId})} + '\''">Manage Appointments</button>
     </div>
 
     <div class="card">
       <h2>Bills</h2>
       <p>View or download your medical bills and payment details.</p>
-      <button onclick="window.location.href='patient_bills.html'">View Bills</button>
+      <button th:onclick="'window.location.href=\'' + @{/patient/bills/{id}(id=${patient.patientId})} + '\''">View Bills</button>
     </div>
 
   </div>
