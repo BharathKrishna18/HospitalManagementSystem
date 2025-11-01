@@ -19,10 +19,22 @@ public class PatientController
 	 @GetMapping("/registerPatient")
 	 public String showRegistrationForm(Model model)
 	 {
-		 model.addAllAttribute("patient", new Patient());
+		 model.addAttribute("patient", new Patient());
 		 return "patient-profile";
 	 }
 	 
-	 
+	 @PostMapping("/register")
+	 public String registerPatient(@ModelAttribute("patient") Patient patient,RedirectAttributes redirectAttributes) 
+	 {
+	        int result = patientRepository.registerPatient(patient);
+
+	        if (result > 0) {
+	            redirectAttributes.addFlashAttribute("success", "Registration successful! Please log in.");
+	            return "redirect:/patients/login";
+	        } else {
+	            redirectAttributes.addFlashAttribute("error", "Registration failed. Try again!");
+	            return "redirect:/patients/register";
+	        }
+	    }
 	
 }
