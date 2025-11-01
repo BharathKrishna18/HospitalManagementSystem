@@ -21,13 +21,13 @@ public class PatientController {
     @Autowired
     private InvoiceService invoiceService;
 
-    @GetMapping("/loginPatient")
+    @GetMapping("/login")
     public String showLoginPage(Model model) {
         model.addAttribute("patient", new Patient());
         return "patient-login";
     }
 
-    @PostMapping("/loginPatient")
+    @PostMapping("/login")
     public String login(@RequestParam String phoneNumber,
                         @RequestParam String password,
                         Model model,
@@ -43,21 +43,34 @@ public class PatientController {
         }
     }
 
-    @GetMapping("/registerPatient")
+    @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("patient", new Patient());
         return "patient-profile";
     }
 
-    @PostMapping("/registerPatient")
-    public String registerPatient(@ModelAttribute Patient patient, RedirectAttributes redirectAttributes) {
+    @PostMapping("/register")
+    public String registerPatient(@ModelAttribute Patient patient,
+                                  @RequestParam String confirmPassword,
+                                  RedirectAttributes redirectAttributes) {
+
+        if (!patient.getPassword().equals(confirmPassword)) 
+        {
+            redirectAttributes.addFlashAttribute("error", "Passwords do not match!");
+            return "redirect:/patient/register";
+        }
+
         int result = patientRepository.registerPatient(patient);
-        if (result > 0) {
+
+        if (result > 0) 
+        {
             redirectAttributes.addFlashAttribute("success", "Registration successful! Please log in.");
-            return "redirect:/patients/loginPatient";
-        } else {
+            return "redirect:/patient/login";
+        } 
+        else 
+        {
             redirectAttributes.addFlashAttribute("error", "Registration failed! Try again!");
-            return "redirect:/patients/registerPatient";
+            return "redirect:/patient/register";
         }
     }
 
