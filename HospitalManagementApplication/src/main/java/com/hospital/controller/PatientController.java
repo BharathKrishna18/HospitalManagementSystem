@@ -33,7 +33,7 @@ public class PatientController {
                         Model model,
                         RedirectAttributes redirectAttributes) {
 
-        Patient patient = patientRepository.findPatientByIdandPassword(phoneNumber, password);
+        Patient patient = patientRepository.findPatientByPhoneAndPassword(phoneNumber, password);
         if (patient != null) {
             model.addAttribute("patient", patient);
             return "dashboard-patient";
