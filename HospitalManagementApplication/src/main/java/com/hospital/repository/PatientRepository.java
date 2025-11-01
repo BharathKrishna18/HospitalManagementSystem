@@ -47,6 +47,28 @@ public class PatientRepository
 		}
 	}
 	
-	//update
+	//display all patients
+	public List<Patient> getAllPatients()
+	{
+		String sql = "SELECT * FROM patient";
+		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Patient.class));
+	}
 	
+	//display one patient by id
+	public Patient getPatientById(Long id) 
+	{
+        String sql = "SELECT * FROM patient WHERE patient_id = ?";
+        try 
+        {
+            return jdbcTemplate.queryForObject(sql,
+                    new BeanPropertyRowMapper<>(Patient.class),
+                    id);
+        } 
+        catch (Exception e) 
+        {
+            return null;
+        }
+    }
+	
+		
 }

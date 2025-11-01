@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Dashboard</title>
+  <style>
+	body {
+	  background: linear-gradient(135deg, #56ccf2, #2f80ed);
+	  font-family: 'Poppins', sans-serif;
+	  margin: 0;
+	  padding: 0;
+	  min-height: 100vh;
+	  color: #333;
+	}
+
+
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .logout-btn:hover {
+      background-color: #c0392b;
+    }
+
+    .welcome {
+      text-align: center;
+      margin-top: 80px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .dashboard-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+      gap: 30px;
+    }
+
+    .card {
+      background-color: white;
+      width: 70%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h2 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    .card button {
+      background-color: #2f80ed;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 15px;
+      width: 95%;               /* Makes button almost full width */
+      max-width: 500px;
+      transition: background-color 0.2s ease;
+    }
+
+    .card button:hover {
+      background-color: #1b5edb;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="logout-btn" onclick="window.location.href='login.html'">Logout</button>
+
+  <div class="welcome">
+    <!-- Replace below with dynamic data from DB -->
+    <!-- Example: Welcome {{patient_name}} ({{patient_id}}) -->
+    <h1>Welcome John Doe (P001)</h1>
+  </div>
+
+  <div class="dashboard-container">
+
+    <div class="card">
+      <h2>Profile</h2>
+      <p>View or edit your personal information and contact details.</p>
+      <button onclick="window.location.href='patient_profile.html'">Modify Profile</button>
+    </div>
+
+    <div class="card">
+      <h2>Appointments</h2>
+      <p>Book new appointments</p>
+      <button onclick="window.location.href='patient_appointments.html'">Manage Appointments</button>
+    </div>
+
+    <div class="card">
+      <h2>Bills</h2>
+      <p>View or download your medical bills and payment details.</p>
+      <button onclick="window.location.href='patient_bills.html'">View Bills</button>
+    </div>
+
+  </div>
+
+</body>
+</html>
