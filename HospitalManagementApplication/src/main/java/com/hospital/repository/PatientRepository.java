@@ -16,10 +16,9 @@ public class PatientRepository
 	//Register
 	public int registerPatient(Patient patient)
 	{
-		String sql = "INSERT INTO patient (mobile_number, name, pwd, dob, blood_group, height, weight, allergies, patient_history) "
-	               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO patient (name, email, password, phone_number, gender, dob, weight, height, blood_group, allergies, previous_medical_history) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-	     int updatedPatient = jdbcTemplate.update(sql,
+	     int registeredPatient = jdbcTemplate.update(sql,
 	            patient.getPhoneNumber(),        
 	            patient.getName(),               
 	            patient.getPassword(),                      
@@ -30,7 +29,7 @@ public class PatientRepository
 	            patient.getAllergies(),          
 	            patient.getPreviousMedicalHistory()); 
 	     
-	     return updatedPatient;
+	     return registeredPatient;
 	}
 	
 	//login
@@ -70,5 +69,23 @@ public class PatientRepository
         }
     }
 	
-		
+	//update patient
+    public int updatePatient(Patient patient) 
+    {
+        String sql = "UPDATE patient SET name = ?, email = ?, phone_number = ?, gender = ?, dob = ?, weight = ?, height = ?, blood_group = ?, allergies = ?, previous_medical_history = ? WHERE patient_id = ?";
+
+        int updatedPatient = jdbcTemplate.update(sql,
+                patient.getName(),
+                patient.getEmail(),
+                patient.getPhoneNumber(),
+                patient.getGender(),
+                patient.getDob(),
+                patient.getWeight(),
+                patient.getHeight(),
+                patient.getBloodGroup(),
+                patient.getAllergies(),
+                patient.getPreviousMedicalHistory(),
+                patient.getPateintId());
+        return updatedPatient;
+    }
 }
