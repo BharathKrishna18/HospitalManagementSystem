@@ -1,5 +1,48 @@
 package com.hospital.repository;
 
-public class PatientRepository {
+import com.hospital.model.Patient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.*;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
+public class PatientRepository 
+{
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
+	//Register new Patient
+	public int registerPatient(Patient patient)
+	{
+		String sql = "INSERT INTO patient (mobile_number, name, pwd, dob, blood_group, height, weight, allergies, patient_history) "
+	               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	     int updatedPatient = jdbcTemplate.update(sql,
+	            patient.getPhoneNumber(),        
+	            patient.getName(),               
+	            patient.getPassword(),                      
+	            patient.getDob(),                
+	            patient.getBloodGroup(),         
+	            patient.getHeight(),             
+	            patient.getWeight(),            
+	            patient.getAllergies(),          
+	            patient.getPreviousMedicalHistory()); 
+	     
+	     return updatedPatient;
+	}
+	
+	public String findPatientByIdandPassword(String email,String password) 
+	{
+		String sql = "SELECT name FROM patient WHERE email = ? and password = ?";
+		try 
+		{
+			return jdbcTemplate.queryForObject(sql,String.class,email,password);
+		}
+		catch(Exception e) 
+		{
+			return "Invalid Credentials";
+		}
+	}
 }
