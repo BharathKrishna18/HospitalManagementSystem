@@ -1,5 +1,6 @@
 package com.hospital.controller;
 
-public class PatientController {
-
+public class PatientController 
+{
+	
 }
