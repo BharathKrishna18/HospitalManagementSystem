@@ -9,6 +9,7 @@ public class HospitalController {
 
 	@GetMapping("/")
 	public String welcome(Model model) {
+		System.out.println(">>> Controller loaded successfully!");
 		model.addAttribute("welcome", "Welcome to ABC Hospital");
 		return "welcome";
 	}
