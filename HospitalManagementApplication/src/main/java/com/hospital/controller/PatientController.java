@@ -39,7 +39,7 @@ public class PatientController {
             return "dashboard-patient";
         } else {
             redirectAttributes.addFlashAttribute("error", "Invalid phone number or password!");
-            return "redirect:/patients/register";
+            return "redirect:/patient/register";
         }
     }
 
@@ -95,7 +95,7 @@ public class PatientController {
                                   @RequestParam String time,
                                   RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("success", "Appointment booked successfully!");
-        return "redirect:/patients/dashboard/" + patientId;
+        return "redirect:/patient/dashboard/" + patientId;
     }
 
     @GetMapping("/update/{id}")
@@ -114,7 +114,7 @@ public class PatientController {
             redirectAttributes.addFlashAttribute("error", "Profile update failed!");
         }
 
-        return "redirect:/patients/dashboard/" ;
+        return "redirect:/patient/dashboard/" ;
     }
 
     @GetMapping("/bills/{id}")
