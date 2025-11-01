@@ -18,4 +18,15 @@ public class AdminRepository {
 			return "Invalid Credentials";
 		}
 	}
+	
+	public int addDoctorDetails(String name,String mobileNumber,String doctorId,String specialization,String password) {
+		try {
+			
+			String sql = "insert into doctor values(?,?,?,?,?)";
+			return jdbcTemplate.update(sql,doctorId,password,specialization,mobileNumber,name);
+			
+		}catch(Exception exception) {
+			return 0;
+		}
+	}
 }

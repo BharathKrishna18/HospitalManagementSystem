@@ -104,6 +104,9 @@
       <label for="mobile">Mobile Number:</label>
       <input type="text" id="mobile" name="mobile" placeholder="Enter mobile number" required>
 
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter password" required>
+
       <label for="docId">Doctor ID:</label>
       <input type="text" id="docId" name="docId" placeholder="Enter doctor ID" required>
 
@@ -120,8 +123,28 @@
       <button type="submit">Register Doctor</button>
     </form>
 
-    <button class="back-btn" th:onclick="|window.location.href='@{/dashboard-admin}'|">← Back to Dashboard</button>
+    <button class="back-btn" th:onclick="window.history.back()">← Back to Dashboard</button>
   </div>
+  <div id="toast" 
+       style="visibility:hidden; min-width:250px; background-color:#4BB543;
+              color:white; text-align:center; border-radius:8px; padding:16px;
+              position:fixed; z-index:1; left:50%; top:30px;
+              transform:translateX(-50%); font-weight:bold;">
+    Doctor registered successfully!
+  </div>
+
+  <script>
+      if (success) {
+          let toast = document.getElementById("toast");
+          toast.style.visibility = "visible";
+
+     
+          setTimeout(() => {
+              toast.style.visibility = "hidden";
+              window.history.back(); 
+          }, 2000);
+      }
+  </script>
 
 </body>
 </html>
