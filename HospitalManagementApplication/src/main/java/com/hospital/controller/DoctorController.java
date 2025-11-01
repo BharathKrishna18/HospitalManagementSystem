@@ -28,14 +28,13 @@ public class DoctorController {
             List<Appointment> appointments = doctorService.findAppointmentsByDoctorId(doctorId);
             
             model.addAttribute("appointments",appointments);
-            return "doctor-dashboard";  // name of your Thymeleaf HTML page
+            return "doctor-dashboard"; 
         } else {
             model.addAttribute("error", "Invalid Credentials");
             return "doctor-login"; // show login page again
         }
+    
     }
     
-    @PostMapping("/doctor/add-prescription")
-    public String prescriptionProcess
     
 }

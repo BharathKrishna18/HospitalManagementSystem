@@ -15,7 +15,7 @@
         }
 
         .login-box {
-            background-color: #fff; /* White rectangle */
+            background-color: #fff;
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
@@ -90,19 +90,22 @@
 
     <h3 class="system-title">Admin Login</h3>
 
-    <form th:action="@{/admin/login}" method="post" th:object="${admin}">
-        <div class="mb-3 text-start">
-            <label for="adminId" class="form-label">Admin ID</label>
-            <input type="text" class="form-control" id="adminId" th:field="*{adminId}" required placeholder="Enter your Admin ID">
-        </div>
+	<form th:action="@{/admin/login}" method="post">
+	    <div class="mb-3 text-start">
+	        <label for="adminId" class="form-label">Admin ID</label>
+	        <input type="text" class="form-control" id="adminId" name="adminId"
+	               required placeholder="Enter your Admin ID">
+	    </div>
 
-        <div class="mb-3 text-start">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" th:field="*{password}" required placeholder="Enter your password">
-        </div>
+	    <div class="mb-3 text-start">
+	        <label for="password" class="form-label">Password</label>
+	        <input type="password" class="form-control" id="password" name="password"
+	               required placeholder="Enter your password">
+	    </div>
 
-        <button type="submit" class="btn btn-login">Sign In</button>
-    </form>
+	    <button type="submit" class="btn btn-login">Sign In</button>
+	</form>
+
 
     <a th:href="@{/}" class="back-link">← Back to Home</a>
 </div>
