@@ -24,6 +24,7 @@ public class AuthController {
 	
 	@GetMapping("/admin/login")
 	public String adminLoginPage() {
+		
 		return "admin-login";
 	}
 	

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,23 +13,24 @@
       min-height: 100vh;
     }
 
-	.logout-btn {
-	    position: absolute;
-	    top: 15px;
-	    right: 15px;
-	    background-color: #dc3545;
-	    color: white;
-	    padding: 8px 16px;
-	    border: none;
-	    border-radius: 4px;
-	    text-decoration: none;
-	    cursor: pointer;
-	    font-weight: bold;
-	    width: auto; /* ✅ Fixes it from stretching full width */
-	}
-	.logout-btn:hover {
-	    background-color: #c82333;
-	}
+    .logout-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #dc3545;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: bold;
+      width: auto;
+    }
+
+    .logout-btn:hover {
+      background-color: #c82333;
+    }
 
     .container {
       max-width: 600px;
@@ -85,41 +86,41 @@
     .back-btn:hover {
       background-color: #616a6b;
     }
-
   </style>
 </head>
 <body>
 
-  <button class="logout-btn" onclick="window.location.href='login.html'">Logout</button>
+  <!-- Logout -->
+  <a th:href="@{/admin/login}" class="logout-btn">Logout</a>
 
   <div class="container">
     <h1>New Doctor Registration</h1>
 
-    <form>
+    <!-- Form -->
+    <form th:action="@{/admin/login/doctor_registration}" method="post">
       <label for="docName">Doctor Name:</label>
-      <input type="text" id="docName" name="docName" placeholder="Enter doctor name">
+      <input type="text" id="docName" name="docName" placeholder="Enter doctor name" required>
 
       <label for="mobile">Mobile Number:</label>
-      <input type="text" id="mobile" name="mobile" placeholder="Enter mobile number">
+      <input type="text" id="mobile" name="mobile" placeholder="Enter mobile number" required>
 
       <label for="docId">Doctor ID:</label>
-      <input type="text" id="docId" name="docId" placeholder="Enter doctor ID">
+      <input type="text" id="docId" name="docId" placeholder="Enter doctor ID" required>
 
       <label for="specialisation">Specialisation:</label>
-      <select id="specialisation" name="specialisation">
-        <option>-- Select Specialisation --</option>
-        <option>Cardiology</option>
-        <option>Neurology</option>
-        <option>Orthopedics</option>
-        <option>Pediatrics</option>
-        <option>General Medicine</option>
+      <select id="specialisation" name="specialisation" required>
+        <option value="">-- Select Specialisation --</option>
+        <option value="Cardiology">Cardiology</option>
+        <option value="Neurology">Neurology</option>
+        <option value="Orthopedics">Orthopedics</option>
+        <option value="Pediatrics">Pediatrics</option>
+        <option value="General Medicine">General Medicine</option>
       </select>
 
-      <!-- Placeholder: Replace action with backend endpoint -->
       <button type="submit">Register Doctor</button>
     </form>
 
-    <button class="back-btn" onclick="window.location.href='admin_dashboard.html'">← Back to Dashboard</button>
+    <button class="back-btn" th:onclick="|window.location.href='@{/dashboard-admin}'|">← Back to Dashboard</button>
   </div>
 
 </body>
