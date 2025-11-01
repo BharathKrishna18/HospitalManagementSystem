@@ -3,10 +3,13 @@ package com.hospital.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hospital.model.Appointment;
 import com.hospital.service.DoctorService;
+import java.util.*;
 
 @Controller
 public class DoctorController {
@@ -22,10 +25,17 @@ public class DoctorController {
 
         if (doctorName != null) {
             model.addAttribute("doctorname", doctorName);
+            List<Appointment> appointments = doctorService.findAppointmentsByDoctorId(doctorId);
+            
+            model.addAttribute("appointments",appointments);
             return "doctor-dashboard";  // name of your Thymeleaf HTML page
         } else {
-            model.addAttribute("error", "Invalid doctor ID or password");
+            model.addAttribute("error", "Invalid Credentials");
             return "doctor-login"; // show login page again
         }
     }
+    
+    @PostMapping("/doctor/add-prescription")
+    public String prescriptionProcess
+    
 }

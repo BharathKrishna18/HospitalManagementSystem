@@ -16,7 +16,6 @@
             justify-content: flex-start;
             padding-top: 50px;
         }
-		
 
         .main-title {
             color: #ffffff;
@@ -92,7 +91,7 @@
 <body>
 <a th:href="@{/}" class="btn logout-btn">Logout</a>
 
-<h2 class="main-title">🏥 Doctor Dashboard</h2>
+<h2 class="main-title">🏥 Doctor Dashboard - Welcome, Dr. <span th:text="${doctorname}"></span></h2>
 
 <div class="dashboard-container">
     <h3>Appointments</h3>
@@ -108,33 +107,16 @@
             </tr>
         </thead>
         <tbody>
-			
-            <!-- Example static rows (replace later with dynamic data) -->
-            <tr>
-                <td>Ayushi Kumari</td>
-                <td>2025-11-02</td>
-                <td>10:00 AM - 10:30 AM</td>
-                <td>Confirmed</td>
-                <td><a th:href="@{/doctor/patient-details/1}" class="btn btn-view">View Details</a></td>
-            </tr>
-            <tr>
-                <td>Riya Sharma</td>
-                <td>2025-11-02</td>
-                <td>11:00 AM - 11:30 AM</td>
-                <td>Pending</td>
-                <td><a th:href="@{/doctor/patient-details/2}" class="btn btn-view">View Details</a></td>
-            </tr>
-            <tr>
-                <td>Neha Patel</td>
-                <td>2025-11-03</td>
-                <td>02:00 PM - 02:30 PM</td>
-                <td>Completed</td>
-                <td><a th:href="@{/doctor/patient-details/3}" class="btn btn-view">View Details</a></td>
+            <tr th:each="appointment : ${appointments}">
+                <td th:text="${appointment.name}"></td>
+                <td th:text="${#dates.format(appointment.appointmentDate, 'dd-MMM-yyyy')}"></td>
+                <td th:text="${#dates.format(appointment.timeSlot, 'HH:mm')}"></td>
+                <td th:text="${appointment.status}"></td>
+                <td><a th:href="@{'/doctor/patient-details/' }" class="btn btn-view">View Details</a></td>
             </tr>
         </tbody>
     </table>
 </div>
-
 
 </body>
 </html>

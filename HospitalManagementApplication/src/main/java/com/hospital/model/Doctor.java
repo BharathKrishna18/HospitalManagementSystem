@@ -8,16 +8,16 @@ public class Doctor {
 	private String name;
 	private String speciality;
 	private String phonenumber;
-	private String email;
 	
 	
-	public Doctor(String doctorId,String password,String name,String speciality,String phonenumber,String email) {
+	
+	public Doctor(String doctorId,String password,String name,String speciality,String phonenumber) {
 		this.doctorId = doctorId;
 		this.password = password;
 		this.name = name;
 		this.speciality = speciality;
 		this.phonenumber = phonenumber;
-		this.email = email;
+		
 	}
 
 
@@ -71,14 +71,6 @@ public class Doctor {
 	}
 
 
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	
 	
 }

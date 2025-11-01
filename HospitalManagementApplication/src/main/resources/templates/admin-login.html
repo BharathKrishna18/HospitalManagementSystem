@@ -9,73 +9,102 @@
             background: linear-gradient(135deg, #56ccf2, #2f80ed);
             font-family: 'Poppins', sans-serif;
             height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
         .login-box {
-            max-width: 450px;
-            margin: 70px auto;
-            background-color: #fff;
-            border-radius: 15px;
+            background-color: #fff; /* White rectangle */
             padding: 40px;
+            border-radius: 15px;
             box-shadow: 0px 8px 20px rgba(0,0,0,0.2);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
         }
-        .btn-login {
-            background-color: #2f80ed;
-            color: #fff;
-            border: none;
+
+        .admin-icon {
+            width: 90px;
+            height: 90px;
+            margin-bottom: 15px;
         }
-        .btn-login:hover {
-            background-color: #1b5edb;
-        }
-        .form-label {
-            font-weight: 500;
-        }
+
         .system-title {
             font-weight: 700;
             color: #2f80ed;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
-        a {
+
+        .form-label {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        .form-control:focus {
+            border-color: #2f80ed;
+            box-shadow: 0 0 4px rgba(47,128,237,0.3);
+        }
+
+        .btn-login {
+            background-color: #2f80ed;
+            color: #fff;
+            font-weight: 600;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            transition: 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #1b5edb;
+        }
+
+        .back-link {
             color: #2f80ed;
+            font-size: 14px;
             text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
         }
-        a:hover {
+
+        .back-link:hover {
             text-decoration: underline;
-        }
-        .admin-icon {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 15px;
         }
     </style>
 </head>
 
 <body>
-<div class="login-box text-center">
-    <!-- Admin Icon -->
-    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Admin Icon" class="admin-icon">
+<div class="login-box">
+    <img th:src="@{/images/admin-icon.png}" 
+         src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" 
+         alt="Admin Icon" class="admin-icon">
 
     <h3 class="system-title">Admin Login</h3>
-    
-    <!-- Admin Login Form -->
-    <form th:action="@{/admin/login}" method="post">
+
+    <form th:action="@{/admin/login}" method="post" th:object="${admin}">
         <div class="mb-3 text-start">
             <label for="adminId" class="form-label">Admin ID</label>
-            <input type="text" class="form-control" id="adminId" name="adminId" required placeholder="Enter your Admin ID">
+            <input type="text" class="form-control" id="adminId" th:field="*{adminId}" required placeholder="Enter your Admin ID">
         </div>
 
         <div class="mb-3 text-start">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required placeholder="Enter your password">
+            <input type="password" class="form-control" id="password" th:field="*{password}" required placeholder="Enter your password">
         </div>
 
-        <button type="submit" class="btn btn-login w-100 mt-3">Sign In</button>
+        <button type="submit" class="btn btn-login">Sign In</button>
     </form>
 
-    <div class="mt-4">
-        <a th:href="@{/}" class="text-muted small">← Back to Home</a>
-    </div>
+    <a th:href="@{/}" class="back-link">← Back to Home</a>
 </div>
-
-
 </body>
 </html>
