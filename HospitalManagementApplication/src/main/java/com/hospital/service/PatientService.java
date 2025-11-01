@@ -18,7 +18,7 @@ public class PatientService {
 
     public Patient loginPatient(String email, String password) 
     {
-        return patientRepository.findPatientByIdandPassword(email, password);
+        return patientRepository.findPatientByPhoneAndPassword(email, password);
     }
 
     public Patient getPatientById(Long id) 
@@ -29,5 +29,10 @@ public class PatientService {
     public int updatePatient(Patient patient)
     {
         return patientRepository.updatePatient(patient);
+    }
+    
+    public void savePatient(Patient patient) 
+    {
+        patientRepository.registerPatient(patient);
     }
 }
