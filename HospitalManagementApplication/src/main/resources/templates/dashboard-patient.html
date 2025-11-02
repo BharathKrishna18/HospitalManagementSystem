@@ -98,8 +98,12 @@
   <a th:href="@{/logout}" class="logout-btn">Logout</a>
 
   <div class="welcome">
-    <!-- Dynamically show patient name and ID -->
-    <h1 th:text="'Welcome ' + ${patient.name} + ' (' + ${patient.patientId} + ')'">Welcome [Patient Name] ([Patient ID])</h1>
+    <!-- ✅ Safe null check for patient -->
+    <h1 th:if="${patient != null}" 
+        th:text="'Welcome ' + ${patient.name} + ' (' + ${patient.patientId} + ')'">
+        Welcome [Patient Name] ([Patient ID])
+    </h1>
+    <h1 th:if="${patient == null}">Welcome, Guest</h1>
   </div>
 
   <div class="dashboard-container">
@@ -107,19 +111,25 @@
     <div class="card">
       <h2>Profile</h2>
       <p>View or edit your personal information and contact details.</p>
-      <button th:onclick="'window.location.href=\'' + @{/patient/profile/{id}(id=${patient.patientId})} + '\''">Modify Profile</button>
+      <button th:onclick="'window.location.href=\'' + @{/patient/update/{id}(id=${patient.patientId})} + '\''">
+        Modify Profile
+      </button>
     </div>
 
     <div class="card">
       <h2>Appointments</h2>
       <p>Book new appointments or view your previous visits.</p>
-      <button th:onclick="'window.location.href=\'' + @{/patient/appointments/{id}(id=${patient.patientId})} + '\''">Manage Appointments</button>
+      <button th:onclick="'window.location.href=\'' + @{/patient/appointment/{id}(id=${patient.patientId})} + '\''">
+        Manage Appointments
+      </button>
     </div>
 
     <div class="card">
       <h2>Bills</h2>
       <p>View or download your medical bills and payment details.</p>
-      <button th:onclick="'window.location.href=\'' + @{/patient/bills/{id}(id=${patient.patientId})} + '\''">View Bills</button>
+      <button th:onclick="'window.location.href=\'' + @{/patient/bills/{id}(id=${patient.patientId})} + '\''">
+        View Bills
+      </button>
     </div>
 
   </div>

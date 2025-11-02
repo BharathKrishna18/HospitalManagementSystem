@@ -26,12 +26,6 @@ public class PatientController {
     @Autowired
     private PatientService patientService;
 
-    @GetMapping("/login")
-    public String showLoginPage(Model model) {
-        model.addAttribute("patient", new Patient());
-        return "patient-login";
-    }
-
     @PostMapping("/login")
     public String login(@RequestParam String phoneNumber,
                         @RequestParam String password,
@@ -56,27 +50,30 @@ public class PatientController {
 
     @PostMapping("/register")
     public String registerPatient(@ModelAttribute Patient patient,
-                                  @RequestParam String confirmPassword,
-                                  RedirectAttributes redirectAttributes) {
+            @RequestParam String confirmPassword,
+            RedirectAttributes redirectAttributes,
+            Model model) 
+    {
 
-        if (!patient.getPassword().equals(confirmPassword)) 
-        {
-            redirectAttributes.addFlashAttribute("error", "Passwords do not match!");
-            return "redirect:/patient/register";
-        }
-
-        int result = patientRepository.registerPatient(patient);
-
-        if (result > 0) 
-        {
-            redirectAttributes.addFlashAttribute("success", "Registration successful! Please log in.");
-            return "redirect:/patient/login";
-        } 
-        else 
-        {
-            redirectAttributes.addFlashAttribute("error", "Registration failed! Try again!");
-            return "redirect:/patient/register";
-        }
+		if (!patient.getPassword().equals(confirmPassword)) 
+		{
+			redirectAttributes.addFlashAttribute("error", "Passwords do not match!");
+			return "redirect:/patient/register";
+		}
+		
+		int result = patientRepository.registerPatient(patient);
+		
+		if (result > 0) 
+		{
+			Patient savedPatient = patientRepository.findPatientByPhoneAndPassword(patient.getPhoneNumber(), patient.getPassword());
+			model.addAttribute("patient", savedPatient);
+			return "dashboard-patient";
+		} 
+		else 
+		{
+			redirectAttributes.addFlashAttribute("error", "Registration failed! Try again!");
+			return "redirect:/patient/register";
+		}
     }
     
     @PostMapping("/saveProfile")
@@ -88,6 +85,9 @@ public class PatientController {
     @GetMapping("/dashboard/{id}")
     public String patientDashboard(@PathVariable Long id, Model model) {
         Patient patient = patientRepository.getPatientById(id);
+        if (patient != null) {
+            return "redirect:/patient/dashboard/" + patient.findPatientByPhoneAndPassword(); // ✅ let controller reload the patient
+        }
         model.addAttribute("patient", patient);
         return "dashboard-patient";
     }

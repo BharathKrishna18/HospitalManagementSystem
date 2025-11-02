@@ -35,7 +35,7 @@ public class Patient
 		this.previousMedicalHistory = previousMedicalHistory;
 	}
 	
-	public Long getPateintId()
+	public Long getPatientId()
 	{
 		return patientId;
 	}

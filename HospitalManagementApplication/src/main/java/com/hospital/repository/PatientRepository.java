@@ -16,17 +16,22 @@ public class PatientRepository {
 
     // ✅ Register Patient
     public int registerPatient(Patient patient) {
-    	String sql = "INSERT INTO patient (name, mobile_number, pwd, blood_group, height, weight, allergies, patient_history) "
-    	           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    	return jdbcTemplate.update(sql, patient.getName(), patient.getPhoneNumber(),
-    	        patient.getPassword(), patient.getBloodGroup(), patient.getHeight(), patient.getWeight(),
-    	        patient.getAllergies(), patient.getPreviousMedicalHistory());
+        String sql = "INSERT INTO patient (name, mobile_number, pwd, blood_group, height, weight, allergies, patient_history) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        return jdbcTemplate.update(sql,
+                patient.getName(),
+                patient.getPhoneNumber(),
+                patient.getPassword(),
+                patient.getBloodGroup(),
+                patient.getHeight(),
+                patient.getWeight(),
+                patient.getAllergies(),
+                patient.getPreviousMedicalHistory());
     }
-    
 
     // ✅ Login using phone number and password
     public Patient findPatientByPhoneAndPassword(String phoneNumber, String password) {
-        String sql = "SELECT * FROM patient WHERE phone_number = ? AND password = ?";
+        String sql = "SELECT * FROM patient WHERE mobile_number = ? AND pwd = ?";
         try {
             return jdbcTemplate.queryForObject(sql,
                     new BeanPropertyRowMapper<>(Patient.class),
@@ -54,22 +59,18 @@ public class PatientRepository {
         }
     }
 
-    // ✅ Update patient details
+    // ✅ Update patient details (only columns your DB actually has)
     public int updatePatient(Patient patient) {
-        String sql = "UPDATE patient SET name = ?, email = ?, phone_number = ?, gender = ?, dob = ?, weight = ?, height = ?, blood_group = ?, allergies = ?, previous_medical_history = ? WHERE patient_id = ?";
-
+        String sql = "UPDATE patient SET name = ?, mobile_number = ?, pwd = ?, blood_group = ?, height = ?, weight = ?, allergies = ?, patient_history = ? WHERE patient_id = ?";
         return jdbcTemplate.update(sql,
                 patient.getName(),
-                patient.getEmail(),
                 patient.getPhoneNumber(),
-                patient.getGender(),
-                patient.getDob(),
-                patient.getWeight(),
-                patient.getHeight(),
+                patient.getPassword(),
                 patient.getBloodGroup(),
+                patient.getHeight(),
+                patient.getWeight(),
                 patient.getAllergies(),
                 patient.getPreviousMedicalHistory(),
-                patient.getPateintId()
-        );
+                patient.getPatientId());
     }
 }
